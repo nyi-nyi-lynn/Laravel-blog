@@ -17,9 +17,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->title(),
+            'title' => $this->faker->name(),
             'slug' => $this->faker->slug(),
-            'content' => $this->faker->paragraph(),
+            'content' => $this->faker->paragraph(250),
             'image' =>$this->faker->imageUrl(),
             'status' => $this->faker->randomElement(['draft','published','archieved']),
             'published_at' => $this->faker->optional()->dateTimeThisYear(),
