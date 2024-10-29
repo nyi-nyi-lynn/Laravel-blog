@@ -15,5 +15,8 @@ Route::get('/home',function(){
 // Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
 // Route::delete('/posts/{post}',[PostController::class, 'destroy'])->name('posts.destroy');
 Route::resource('posts',PostController::class);
+Route::get('/test',function(){
+    return view('Test.index');
+});
 
 
