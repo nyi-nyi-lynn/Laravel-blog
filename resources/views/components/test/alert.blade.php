@@ -1,3 +1,7 @@
 <div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
+  
+    <div {{ $attributes->class(['alert alert-'.$type]) }}>
+        <span class="alert-title">{{$title }}</span>
+       <span> {{ $textMessage }}</span>
+    </div>
 </div>
