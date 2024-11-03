@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -28,13 +29,18 @@ class PostController extends Controller
     /**
      * store the new post and return all post page
      */
-    public function store(Request $request){
+    public function store(Request $request) : RedirectResponse
+    {
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
         $post = new Post();
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);
         $post->content = $request->content;
         $post->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show',[$post->id]);
     }
 
     /**
@@ -56,6 +62,12 @@ class PostController extends Controller
      * store the updated data
      */
     public function update(Request $request,Post $post){
+        $validated = $request->validate([
+            'id' => 'required|unique:posts',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string',
+            'content' => 'required|string',
+        ]);
         $post->title = $request->title;
         $post->content = $request->content;
         $post->slug = Str::slug($request->title);

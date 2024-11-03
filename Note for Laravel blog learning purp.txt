@@ -1,0 +1,77 @@
+Note for Laravel blog learning purpose
+
+Main Tables:
+
+    Users Table
+        Stores information about users, including authors and commenters.
+        Fields:
+            user_id: Unique identifier for each user.
+            username: Username (unique).
+            email: User's email (unique).
+            password_hash: Encrypted password.
+            created_at: Timestamp of account creation.
+
+    Posts Table
+        Stores blog posts with details like title, content, and author.
+        Fields:
+            post_id: Unique identifier for each post.
+            title: Title of the blog post.
+	    slug : for url 
+            content: Main content of the post.
+	    image : 
+	    status : draft, published , achieved
+            author_id: Links to the user who created the post.
+	    published_at : published time 
+            created_at: Timestamp when the post was created.
+            updated_at: Timestamp for the last update.
+
+    Comments Table
+        Stores comments made on blog posts.
+        Fields:
+            comment_id: Unique identifier for each comment.
+            post_id: Links to the post the comment belongs to.
+            user_id: Links to the user who made the comment.
+            content: The comment text.
+            created_at: Timestamp of comment creation.
+
+    Categories Table
+        Defines categories for grouping posts.
+        Fields:
+            category_id: Unique identifier for each category.
+            name: Category name (unique).
+            description: Description of the category.
+
+    Post_Categories Table
+        Many-to-many relationship table to link posts with categories.
+        Fields:
+            post_id: Links to a post.
+            category_id: Links to a category.
+
+    Tags Table
+        Defines tags for further classification of posts.
+        Fields:
+            tag_id: Unique identifier for each tag.
+            name: Tag name (unique).
+
+    Post_Tags Table
+        Many-to-many relationship table to link posts with tags.
+        Fields:
+            post_id: Links to a post.
+            tag_id: Links to a tag.
+
+Optional Tables:
+
+    Likes Table: Tracks user interactions with posts.
+        Fields:
+            like_id: Unique identifier for each like.
+            post_id: Links to the liked post.
+            user_id: Links to the user who liked the post.
+            created_at: Timestamp when the like was made.
+
+    Replies Table: Allows comments to have threaded replies.
+        Fields:
+            reply_id: Unique identifier for each reply.
+            comment_id: Links to the comment being replied to.
+            user_id: Links to the user who replied.
+            content: Reply text.
+            created_at: Timestamp of reply creation.

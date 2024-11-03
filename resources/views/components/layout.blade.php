@@ -15,7 +15,7 @@
     @vite('resources/js/app.js')
 
   </head>
-  <body>o
+  <body>
     {{ $slot }}
 
      {{-- <!-- Preloader -->
