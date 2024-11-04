@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,12 +30,16 @@ class PostController extends Controller
     /**
      * store the new post and return all post page
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(StorePostRequest $request) : RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string',
-        ]);
+        //retrieve the validated data
+        $validated = $request->validated();
+
+        //retrieve the portion of the validated input data
+        $validated = $request->safe()->only(['name','email']);
+        $validate = $request->safe()->except(['name','email']);
+
+
         $post = new Post();
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);

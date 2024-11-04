@@ -13,11 +13,11 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label for="title"  class="form-label">Post Title</label>
-                            <input type="text" name="title" class="form-control" id="title" value="{{ $post->title }}" placeholder="" required>
+                            <input type="text" name="title" class="form-control" id="title" value="{{ old('title',$post->title) }}" placeholder="" required>
                           </div>
                           <div class="mb-3">
                             <label for="content" class="form-label">Content</label>
-                            <textarea class="form-control" name="content" id="content" rows="3" required="required">{{ $post->content }}</textarea>
+                            <textarea class="form-control" name="content" id="content" rows="3" required="required">{{ old('content',$post->content) }}</textarea>
                           </div>
                          <button type="submit" class="btn btn-primary">Submit</button>  
                     </form>

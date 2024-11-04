@@ -2,7 +2,7 @@
     -webkit-box-shadow: 4px 11px 53px -25px rgba(107,237,228,1);
     -moz-box-shadow: 4px 11px 53px -25px rgba(107,237,228,1);
     box-shadow: 4px 11px 53px -25px rgba(107,237,228,1);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .new-input-box>input{
