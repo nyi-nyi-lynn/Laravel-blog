@@ -23,7 +23,7 @@
                                 <img src="{{ asset("$post->image") }}" alt="Image" class="img-fluid">
                             </a>
                             <div>
-                                <span class="date">{{ $post->created_at->format('Y-m-d') }} &bullet; <a href="#">Category Name</a></span>
+                                <span class="date">{{ $post->created_at->format('Y-m-d') }} &bullet; <a href="#">{{ $post->category->name }}</a></span>
                                 <h2><a href="{{ route('posts.show',[$post->id]) }}">{{ $post->title }}</a></h2>
                                 <p>{{ Str::limit($post->content, 100, '...') }}</p>
                                 <p><a href="{{ route('posts.show',[$post->id]) }}" class="btn btn-sm btn-outline-primary">{{ __('Read More') }}</a>

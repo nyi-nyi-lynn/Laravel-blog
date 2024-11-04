@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,6 +26,7 @@ class PostFactory extends Factory
             'published_at' => $this->faker->optional()->dateTimeThisYear(),
             'created_at' => now(),
             'updated_at'  => now(),
+            'category_id' => Category::factory(),
         ];
     }
 }

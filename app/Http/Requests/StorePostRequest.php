@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'slug' => Str::slug($this->slug),
+            'slug' => Str::slug($this->title),
         ]);
     }
 

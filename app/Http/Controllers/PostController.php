@@ -32,19 +32,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
-        //retrieve the validated data
-        $validated = $request->validated();
-
-        //retrieve the portion of the validated input data
-        $validated = $request->safe()->only(['name','email']);
-        $validate = $request->safe()->except(['name','email']);
-
-
-        $post = new Post();
-        $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
-        $post->content = $request->content;
-        $post->save();
+       $post =  Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'slug' => $request->slug,
+        ]);
         return redirect()->route('posts.show',[$post->id]);
     }
 
