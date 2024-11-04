@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-class StorePostRequest extends FormRequest
-
+class UpdatePostRequest extends FormRequest
 {
-    // protected $redirectRoute = 'posts.index';
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -17,12 +15,11 @@ class StorePostRequest extends FormRequest
         return true;
     }
 
-
     /**
-     * Prepare the data for validation.
+     * 
+     * prepare the data for validation 
      */
-    protected function prepareForValidation(): void
-    {
+    public function prepareForValidation(){
         $this->merge([
             'slug' => Str::slug($this->title),
         ]);
@@ -36,15 +33,11 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:posts|max:255',
+            //
+            'title' => 'required|max:255',
             'content' => 'required',
             'slug'=> 'required',
             'category_id' => 'required',
         ];
-    }
-
-    public function messages(): array
-    {
-        return [];
     }
 }

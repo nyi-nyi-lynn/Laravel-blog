@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,7 +26,8 @@ class PostController extends Controller
      * return form view to create new post
      */
     public function create(){
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create',compact('categories'));
     }
 
     /**
@@ -32,11 +35,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request) : RedirectResponse
     {
-       $post =  Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => $request->slug,
-        ]);
+        $post = Post::create($request->validated());
         return redirect()->route('posts.show',[$post->id]);
     }
 
@@ -52,23 +51,16 @@ class PostController extends Controller
      * return edit form view
      */
     public function edit(Post $post){
-        return view('posts.edit',compact('post'));
+        $categories = Category::all();
+        return view('posts.edit',compact('post','categories'));
     }
 
     /**
      * store the updated data
      */
-    public function update(Request $request,Post $post){
-        $validated = $request->validate([
-            'id' => 'required|unique:posts',
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string',
-            'content' => 'required|string',
-        ]);
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->slug = Str::slug($request->title);
-        $post->save();
+    public function update(UpdatePostRequest $request,Post $post) : RedirectResponse
+    {
+        $bol = $post->update($request->validated());
         return redirect()->route('posts.index');
     }
 

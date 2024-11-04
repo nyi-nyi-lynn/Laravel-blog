@@ -11,9 +11,9 @@ class Post extends Model
 {
     use HasFactory,Notifiable;
 
-    protected $fillable =['title' , 'content','slug'];
+    protected $fillable =['title' , 'content','slug','category_id'];
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
     public function category(){
         return $this->belongsTo(Category::class);
